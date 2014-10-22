@@ -20,11 +20,6 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-    Router::connect('/shop', array('controller' => 'shops', 'action' => 'index'));
-    Router::connect('/shop/*', array('controller' => 'shops', 'action' => 'view'));
-    Router::connect('/shop/create', array('controller' => 'shops', 'action' => 'add'));
-    Router::connect('/shop/*/edit', array('controller' => 'shops', 'action' => 'edit'));
-    Router::connect('/shop/*/delete', array('controller' => 'shops', 'action' => 'delete'));
     Router::connect('/login', array('controller' => 'sessions', 'action' => 'login'));
     Router::connect('/logout', array('controller' => 'sessions', 'action' => 'logout'));
     Router::connect('/', array('controller' => 'sessions', 'action' => 'login'));
@@ -41,6 +36,3 @@
  * the built-in default routes.
  */
 	require CAKE . 'Config' . DS . 'routes.php';
-
-//    Router::mapResources('shops');
-//    Router::parseExtensions();

@@ -1,3 +1,5 @@
+<div class="users form">
+<h1>Shops</h1>
 <table>
     <thead>
         <th>
@@ -6,9 +8,8 @@
             <td>Role</td>
             <td>Price Selection</td>
             <td>Start Work Time</td>
-            <td>View</td>
-            <td>Edit</td>
-            <td>Delete</td>
+            <td>Created At</td>
+            <td>操作</td>
         </th>
     </thead>
     <tbody>
@@ -21,16 +22,27 @@
         ?>
         <tr>
             <td><?=$no?></td>
-            <td><?=$this->Html->link($shop['Shop']['login_id'], '/shop/' . $shop['Shop']['id'])?></td>
+            <td><?=$this->Html->link($shop['Shop']['login_id'], array('action' => 'view', $shop['Shop']['id']))?></td>
             <td><?=$shop['Shop']['name']?></td>
             <td><?=$shop['Shop']['role']?></td>
             <td><?=number_format($shop['Shop']['price_selection'])?></td>
             <td><?=$shop['Shop']['start_work_time']?></td>
-            <td><?=$this->Html->link('View', '/shop/' . $shop['Shop']['id'])?></td>
-            <td><?=$this->Html->link('Edit', '/shop/' . $shop['Shop']['id'] . '/edit')?></td>
-            <td><?=$this->Html->link('Delete', '/shop/' . $shop['Shop']['id'] . '/delete')?></td>
+            <td><?php echo $this->Time->niceShort($shop['Shop']['created_at']); ?></td>
+            <td>
+                <?=$this->Html->link('View', array('action' => 'view', $shop['Shop']['id']))?> |
+                <?=$this->Html->link('編集', array('action' => 'edit', $shop['Shop']['id']))?> |
+                <?=$this->Html->link('削除', array('action' => 'delete', $shop['Shop']['id']))?>
+            </td>
         </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 <?php echo $this->element('pagination'); ?>
+</div>
+<?php echo $this->Html->link("Add A New Shop", array('action' => 'add'), array('escape' => false)); ?>
+<br/>
+<?php echo $this->Html->link("List Shops", array('action' => 'index'), array('escape' => false)); ?>
+<br/>
+<?php
+echo $this->Html->link("Logout", array('action' => 'logout'));
+?>

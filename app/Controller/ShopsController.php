@@ -9,7 +9,7 @@ class ShopsController extends AppController {
     public $paginate = array(
         'limit' => self::ITEMS_PER_PAGE,
         'order' => array(
-            'Shop.name' => 'asc'
+            'Shop.login_id' => 'asc'
         )
     );
 
