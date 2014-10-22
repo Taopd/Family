@@ -1,4 +1,4 @@
-<div class="users form">
+<div class="shops form">
 <h1>Shops</h1>
 <table>
     <thead>

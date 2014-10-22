@@ -36,16 +36,18 @@ class ShopsController extends AppController {
     }
 
     public function add() {
-        $this->Shop->create();
-        if ($this->Shop->save($this->request->data)) {
-            $message = 'Saved';
-        } else {
-            $message = 'Error';
+        if ($this->request->is('post')) {
+            $this->Shop->create();
+            if ($this->Shop->save($this->request->data)) {
+                $message = 'Saved';
+            } else {
+                $message = 'Error';
+            }
+            $this->set(array(
+                'message' => $message,
+                '_serialize' => array('message')
+            ));
         }
-        $this->set(array(
-            'message' => $message,
-            '_serialize' => array('message')
-        ));
     }
 
     public function edit($id) {
