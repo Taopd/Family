@@ -29,26 +29,43 @@ $appDescription = 'MOTAPP Shop Management';
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
+		echo $this->Html->css('bootstrap.min');
+        echo $this->Html->css('font-awesome.min');
+
+        echo $this->Html->script('jquery.min.js');
+        echo $this->Html->script('ie10-viewport-bug-workaround.js');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+    <style type="text/css">
+        body {
+            padding-top: 70px;
+        }
+    </style>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($appDescription, '/'); ?></h1>
-		</div>
-		<div id="content">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <?php echo $this->element('navbar');?>
+        </div>
+    </div>
+    <div class="container">
+        <?php echo $this->Session->flash(); ?>
 
-			<?php echo $this->Session->flash(); ?>
+        <?php echo $this->fetch('content'); ?>
 
-			<?php echo $this->fetch('content'); ?>
-		</div>
-        <div id="footer">&copy; MOTAPP <?=date('Y')?></div>
-	</div>
+        <hr>
+        <?php echo $this->element('footer');?>
+    </div>
+    
 	<?php echo $this->element('sql_dump'); ?>
+    <?=$this->Html->script('bootstrap.min.js')?>
 </body>
 </html>

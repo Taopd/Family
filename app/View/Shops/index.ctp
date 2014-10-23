@@ -1,42 +1,61 @@
-<div class="shops form">
-<h1>Shops</h1>
-<table>
-    <thead>
-        <th>
-            <td>Login ID</td>
-            <td>Name</td>
-            <td>Role</td>
-            <td>Price Selection</td>
-            <td>Start Work Time</td>
-            <td>Created At</td>
-            <td>操作</td>
-        </th>
-    </thead>
-    <tbody>
-        <?php
-        $no = ($this->Paginator->current() - 1) * $items_per_page;
-        ?>
-        <?php foreach ($shops as $shop): ?>
-        <?php
-        ++$no;
-        ?>
-        <tr>
-            <td><?=$no?></td>
-            <td><?=$this->Html->link($shop['Shop']['login_id'], array('action' => 'view', $shop['Shop']['id']))?></td>
-            <td><?=$shop['Shop']['name']?></td>
-            <td><?=$shop['Shop']['role']?></td>
-            <td><?=number_format($shop['Shop']['price_selection'])?></td>
-            <td><?=$shop['Shop']['start_work_time']?></td>
-            <td><?php echo $this->Time->niceShort($shop['Shop']['created_at']); ?></td>
-            <td>
-                <?=$this->Html->link('View', array('action' => 'view', $shop['Shop']['id']))?> |
-                <?=$this->Html->link('編集', array('action' => 'edit', $shop['Shop']['id']))?> |
-                <?=$this->Html->link('削除', array('action' => 'delete', $shop['Shop']['id']))?>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+<div class="panel panel-primary">
+    <div class="panel-heading clearfix">
+        <h3 class="panel-title pull-left" style="padding-top: 7.5px;">List of Shops</h3>
+        <div class="btn-group pull-right">
+            <?=$this->Html->link("Add Shop", array('action' => 'add'), array('escape' => false, 'class' => 'btn btn-success'))?>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+                <th>#</th>
+                <th>Login ID</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Price Selection</th>
+                <th>Start Work Time</th>
+                <th>Created At</th>
+                <th class="text-center">操作</th>
+            </thead>
+            <tbody>
+            <?php
+            $no = ($this->Paginator->current() - 1) * $items_per_page;
+            ?>
+            <?php foreach ($shops as $shop): ?>
+            <?php
+            ++$no;
+            ?>
+            <tr>
+                <td><?=$no?></td>
+                <td><?=$this->Html->link($shop['Shop']['login_id'], array('action' => 'view', $shop['Shop']['id']))?></td>
+                <td><?=$shop['Shop']['name']?></td>
+                <td><?=$shop['Shop']['role']?></td>
+                <td><?=number_format($shop['Shop']['price_selection'])?></td>
+                <td><?=$shop['Shop']['start_work_time']?></td>
+                <td><?php echo $this->Time->niceShort($shop['Shop']['created_at']); ?></td>
+                <td class="text-center">
+                    <?=$this->Html->link('編集', array('action' => 'edit', $shop['Shop']['id']), array('class' => 'btn btn-info'))?>
+                    <button title="削除" class="btn btn-danger" id="deleteButton<?=$shop['Shop']['id']?>" onclick="removeShopById(<?=$shop['Shop']['id']?>)">削除</button>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
 <?php echo $this->element('pagination'); ?>
+    </div>
 </div>
-<?php echo $this->element('sidebar'); ?>
+<script type="text/javascript">
+    function removeShopById(id) {
+        if (confirm('Do you really want to delete?')) {
+            var url = '/shops/delete/' + id;
+            $.ajax({
+                url : url,
+                type : 'DELETE',
+                success : function(data) {
+                    window.location.href = '/shops';
+                }
+            });
+        }
+        return false;
+    }
+</script>

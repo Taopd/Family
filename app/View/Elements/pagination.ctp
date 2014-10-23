@@ -1,23 +1,17 @@
 <?php
 $paginator = $this->Paginator;
 ?>
-<div class="paging">
-    <?php
-    // the 'first' page button
-    echo $paginator->first("First");
-    // 'prev' page button,
-    // we can check using the paginator hasPrev() method if there's a previous page
-    // save with the 'next' page button
-    if ($paginator->hasPrev()) {
-        echo $paginator->prev("Prev");
-    }
-    // the 'number' page buttons
-    echo $paginator->numbers(array('modulus' => 2));
-    // for the 'next' button
-    if ($paginator->hasNext()) {
-        echo $paginator->next("Next");
-    }
-    // the 'last' page button
-    echo $paginator->last("Last");
-    ?>
-</div>
+<p>
+<?php
+    echo $this->Paginator->counter(array(
+  'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
+));
+?>
+</p>
+<ul class="pagination">
+<?php
+    echo $this->Paginator->prev('&laquo;', array('tag' => 'li', 'escape' => false), '<a href="#">&laquo;</a>', array('class' => 'prev disabled', 'tag' => 'li', 'escape' => false));
+    echo $this->Paginator->numbers(array('separator' => '', 'tag' => 'li', 'currentLink' => true, 'currentClass' => 'active', 'currentTag' => 'a'));
+    echo $this->Paginator->next('&raquo;', array('tag' => 'li', 'escape' => false), '<a href="#">&raquo;</a>', array('class' => 'prev disabled', 'tag' => 'li', 'escape' => false));
+?>
+</ul>
