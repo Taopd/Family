@@ -61,12 +61,15 @@ class ShopuiidsController extends AppController {
             $this->Session->setFlash(
                 __('The shop uiid with id: %s has been deleted.', h($id))
             );
-            return $this->redirect(array('action' => 'index'));
+            $responseData = array(
+                'success' => true,
+            );
+        } else {
+            $responseData = array(
+                'success' => false,
+            );
         }
 
-        $this->set(array(
-            'success' => true,
-            '_serialize' => array('success')
-        ));
+        $this->set('responseData', json_encode($responseData));
     }
 }
