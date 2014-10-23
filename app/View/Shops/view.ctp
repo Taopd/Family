@@ -1,8 +1,11 @@
-<div class="shops view">
-    <h1>Detail Shop</h1>
-    <table>
+<div class="panel panel-primary">
+<div class="panel-heading">
+	<h3 class="panel-title">Shop Detail</h3>
+</div>
+<div class="panel-body">
+	<table class="table table-hover">
         <tr>
-            <td scope="row">ID</td>
+            <td scope="row" style=>ID</td>
             <td><?=$shop['Shop']['id']?></td>
         </tr>
         <tr>
@@ -74,5 +77,6 @@
             <td><?=$this->Time->niceShort($shop['Shop']['updated_at'])?></td>
         </tr>
     </table>
+<p class="pull-right"><?=$this->Html->link("編集", array('action' => 'edit', $shop['Shop']['id']), array('escape' => false, 'class' => 'btn btn-info'))?></p>
 </div>
-<?php echo $this->element('sidebar'); ?>
+</div>
