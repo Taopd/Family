@@ -8,7 +8,7 @@
                 <th>#</th>
                 <th>Shop Name</th>
                 <th>UIID</th>
-                <th>Active</th>
+                <th>Status</th>
                 <th>Created At</th>
                 <th class="text-center">操作</th>
             </thead>

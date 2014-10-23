@@ -36,6 +36,10 @@ class AppController extends Controller {
         'DebugKit.Toolbar',
         'Session',
         'Auth' => array(
+            'loginAction' => array(
+                'controller' => 'sessions',
+                'action' => 'login',
+            ),
             'loginRedirect' => array('controller' => 'shops', 'action' => 'index'),
             'logoutRedirect' => array('controller' => 'sessions', 'action' => 'login'),
             'authError' => 'You must be logged in to view this page.',
