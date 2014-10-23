@@ -4,6 +4,12 @@ class Shop extends AppModel {
 
     public $useTable = 'shop';
 
+    public $hasMany = array(
+        'Shopuiid' => array(
+            'className' => 'ShopUiid',
+        ),
+    );
+
     public $validate = array(
         'login_id' => array(
             'nonEmpty' => array(

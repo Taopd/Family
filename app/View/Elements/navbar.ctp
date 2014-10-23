@@ -11,6 +11,7 @@
     <?php if ($this->Session->check('Auth.User')) :?>
     <ul class="nav navbar-nav">
         <li><?=$this->Html->link('Shops', array('controller' => 'shops', 'action' => 'index'))?></li>
+        <li><?=$this->Html->link('Shop UIIDs', array('controller' => 'shopuiids', 'action' => 'index'))?></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">

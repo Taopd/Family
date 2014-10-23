@@ -37,7 +37,7 @@
             <?php endforeach; ?>
             </tbody>
         </table>
-<?php echo $this->element('pagination'); ?>
+        <?php echo $this->element('pagination'); ?>
     </div>
 </div>
 <script type="text/javascript">
