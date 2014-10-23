@@ -70,6 +70,7 @@ class ShopuiidsController extends AppController {
             );
         }
 
+        $this->layout = 'ajax';
         $this->set('responseData', json_encode($responseData));
     }
 }
