@@ -6,7 +6,7 @@ class Shop extends AppModel {
 
     public $hasMany = array(
         'Shopuiid' => array(
-            'className' => 'ShopUiid',
+            'className' => 'Shopuiid',
         ),
     );
 
