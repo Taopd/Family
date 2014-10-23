@@ -11,9 +11,7 @@
                 <th>#</th>
                 <th>Login ID</th>
                 <th>Name</th>
-                <th>Role</th>
-                <th>Price Selection</th>
-                <th>Start Work Time</th>
+                <th>Email</th>
                 <th>Created At</th>
                 <th class="text-center">操作</th>
             </thead>
@@ -29,9 +27,7 @@
                 <td><?=$no?></td>
                 <td><?=$this->Html->link($shop['Shop']['login_id'], array('action' => 'view', $shop['Shop']['id']))?></td>
                 <td><?=$shop['Shop']['name']?></td>
-                <td><?=$shop['Shop']['role']?></td>
-                <td><?=number_format($shop['Shop']['price_selection'])?></td>
-                <td><?=$shop['Shop']['start_work_time']?></td>
+                <td><?=$shop['Shop']['email']?></td>
                 <td><?php echo $this->Time->niceShort($shop['Shop']['created_at']); ?></td>
                 <td class="text-center">
                     <?=$this->Html->link('編集', array('action' => 'edit', $shop['Shop']['id']), array('class' => 'btn btn-info'))?>
