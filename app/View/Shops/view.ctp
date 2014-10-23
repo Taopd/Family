@@ -1,6 +1,9 @@
 <div class="panel panel-primary">
-<div class="panel-heading">
-	<h3 class="panel-title">Shop Detail</h3>
+<div class="panel-heading clearfix">
+    <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Shop Detail</h3>
+    <div class="btn-group pull-right">
+        <?=$this->Html->link("List of Shops", array('action' => 'index'), array('escape' => false, 'class' => 'btn btn-success'))?>
+    </div>
 </div>
 <div class="panel-body">
 	<table class="table table-hover">
@@ -77,6 +80,6 @@
             <td><?=$this->Time->niceShort($shop['Shop']['updated_at'])?></td>
         </tr>
     </table>
-<p class="pull-right"><?=$this->Html->link("編集", array('action' => 'edit', $shop['Shop']['id']), array('escape' => false, 'class' => 'btn btn-info'))?></p>
+<p class="text-center"><?=$this->Html->link("編集", array('action' => 'edit', $shop['Shop']['id']), array('escape' => false, 'class' => 'btn btn-info'))?></p>
 </div>
 </div>

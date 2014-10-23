@@ -57,15 +57,20 @@ $appDescription = 'MOTAPP Shop Management';
         </div>
     </div>
     <div class="container">
-        <?php echo $this->Session->flash(); ?>
+        <?php
+        if ($this->Session->check('Message.flash')) {
+        ?>
+        <div class="alert alert-info" role="alert"><?php echo $this->Session->flash(); ?></div>
+        <?php
+        }
+        ?>
 
         <?php echo $this->fetch('content'); ?>
 
         <hr>
         <?php echo $this->element('footer');?>
     </div>
-    
-	<?php echo $this->element('sql_dump'); ?>
     <?=$this->Html->script('bootstrap.min.js')?>
+	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

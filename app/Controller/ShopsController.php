@@ -89,7 +89,11 @@ class ShopsController extends AppController {
             $this->Session->setFlash(
                 __('The shop with id: %s has been deleted.', h($id))
             );
-            return $this->redirect(array('action' => 'index'));
-        }
+            return $this->redirect(array('action' => 'index'));;        }
+
+        $this->set(array(
+            'success' => true,
+            '_serialize' => array('success')
+        ));
     }
 }
