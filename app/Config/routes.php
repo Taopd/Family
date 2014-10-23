@@ -25,6 +25,7 @@
     Router::connect('/', array('controller' => 'sessions', 'action' => 'login'));
     
     Router::connect('/api/regist_shop', array('controller' => 'Api', 'action' => 'registerShop'));
+    Router::connect('/api/getSendURL', array('controller' => 'Api', 'action' => 'getSendUrl'));
 	//Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
 /**
