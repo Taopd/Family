@@ -7,6 +7,10 @@ class ApiController extends AppController {
 
     public $layout     = 'api';
 
+    public function beforeFilter() {
+        $this->Auth->allow();
+        parent::beforeFilter();
+    }
     public function registerShop() {
 
         if ($this->request->is('post')) {
@@ -51,5 +55,18 @@ class ApiController extends AppController {
             $this->set('result', json_encode($response));
             $this->render('default_api');
         }
+    }
+
+    public function getSendUrl($UIID) {
+        $this->Shopuiid->primaryKey = 'uiid';
+        if ($this->Shopuiid->exists($UIID)) {
+            $response_json = json_encode(array("url" => Configure::read('real_server')));
+            $this->set('result',$response_json);
+        } else {
+            $response_json = json_encode(array("url" => Configure::read('test_server')));
+            $this->set('result',$response_json);
+        }
+
+        $this->render('default_api');
     }
 }

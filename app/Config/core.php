@@ -383,3 +383,6 @@ Cache::config('_cake_model_', array(
 	'serialize' => ($engine === 'File'),
 	'duration' => $duration
 ));
+
+Configure::write('real_server', 'admin.trust-dk.com');
+Configure::write('test_server', 'dev.trust-dk.com');
