@@ -39,16 +39,11 @@ class ShopsController extends AppController {
     public function add() {
         if ($this->request->is('post')) {
             $this->Shop->create();
-            $this->Shop->set($this->request->data);
-            if ($this->Shop->validates()) {
-                if ($this->Shop->save($this->request->data)) {
-                    $this->Session->setFlash(__('Your shop has been saved.'));
-                    return $this->redirect(array('action' => 'index'));
-                }
-                $this->Session->setFlash(__('Unable to add your shop.'));
-            } else {
-                $errors = $this->Shop->validationErrors;
+            if ($this->Shop->save($this->request->data)) {
+                $this->Session->setFlash(__('Your shop has been saved.'));
+                return $this->redirect(array('action' => 'index'));
             }
+            $this->Session->setFlash(__('Unable to add your shop.'));
         }
     }
 
@@ -72,7 +67,7 @@ class ShopsController extends AppController {
         }
         
         if (!$this->request->data) {
-            $this->request->data = $post;
+            $this->request->data = $shop;
         }
     }
 

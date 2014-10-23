@@ -34,12 +34,16 @@ class Shop extends AppModel {
         ),
         'email' => array(
             'required' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'Email is required.'
+                'rule' => array('email', true),
+                'message' => 'Please provide a valid email address.'
             ),
-            'email' => array(
-                'rule' => 'email',
-                'message' => 'Please input correct email.'
+             'unique' => array(
+                'rule'    => array('isUniqueEmail'),
+                'message' => 'This email is already in use.',
+            ),
+            'between' => array(
+                'rule' => array('between', 6, 60),
+                'message' => 'Email must be between 6 to 60 characters.'
             )
         ),
         'password' => array(
@@ -62,6 +66,21 @@ class Shop extends AppModel {
                 'message' => 'Both passwords must match.'
             )
         ),
+        'password_update' => array(
+            'min_length' => array(
+                'rule' => array('minLength', '6'),
+                'message' => 'Password must have a mimimum of 6 characters',
+                'allowEmpty' => true,
+                'required' => false
+            )
+        ),
+        'password_confirm_update' => array(
+             'equaltofield' => array(
+                'rule' => array('equaltofield','password_update'),
+                'message' => 'Both passwords must match.',
+                'required' => false,
+            )
+        )
     );
 
     /**
@@ -71,7 +90,7 @@ class Shop extends AppModel {
      */
     function isUniqueUsername($check) {
 
-        $shop = $this->find(
+        $login_id = $this->find(
             'first',
             array(
                 'fields' => array(
@@ -83,8 +102,33 @@ class Shop extends AppModel {
                 )
             )
         );
-        if (!empty($shop)) {
-            if (isset($this->data[$this->alias]['id']) && ($this->data[$this->alias]['id'] == $shop['Shop']['id'])) {
+        if (!empty($login_id)) {
+            if (isset($this->data[$this->alias]['id']) && ($this->data[$this->alias]['id'] == $login_id['Shop']['id'])) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    function isUniqueEmail($check) {
+
+        $email = $this->find(
+            'first',
+            array(
+                'fields' => array(
+                    'Shop.id'
+                ),
+                'conditions' => array(
+                    'Shop.email' => $check['email']
+                )
+            )
+        );
+
+        if (!empty($email)) {
+            if (isset($this->data[$this->alias]['id']) && ($this->data[$this->alias]['id'] == $email['Shop']['id'])) {
                 return true;
             } else {
                 return false;
