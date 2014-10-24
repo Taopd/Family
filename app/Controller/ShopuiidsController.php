@@ -8,6 +8,9 @@ class ShopuiidsController extends AppController {
     
     public $paginate = array(
         'limit' => self::ITEMS_PER_PAGE,
+        'order' => array(
+            'Shopuiid.created_at' => 'desc'
+        )
     );
 
     public function index() {

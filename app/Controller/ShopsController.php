@@ -9,14 +9,13 @@ class ShopsController extends AppController {
     public $paginate = array(
         'limit' => self::ITEMS_PER_PAGE,
         'order' => array(
-            'Shop.login_id' => 'asc'
+            'Shop.created_at' => 'desc'
         )
     );
 
     public function index() {
         $this->Paginator->settings = $this->paginate;
         $shops = $this->Paginator->paginate('Shop');
-        
         $this->set(array(
             'shops' => $shops,
             'items_per_page' => self::ITEMS_PER_PAGE,
