@@ -13,10 +13,9 @@ class Shopuiid extends AppModel {
         )
     );
 
-    public function findByUiid($shop_id, $uiid) {
+    public function findByUiid($uiid) {
         $shopuiid = $this->find('first', array(
             'conditions' => array(
-                'Shopuiid.shop_id' => $shop_id,
                 'Shopuiid.uiid' => $uiid,
             )
         ));
@@ -25,34 +24,38 @@ class Shopuiid extends AppModel {
     }
 
     public function checkAndSave($data) {
-        $shopuiid = $this->findByUiid($data['shop_id'], $data['uiid']);
+        $shopuiid = $this->findByUiid($data['uiid']);
+        $isNew = false;
+        $requestData = array();
+        $successMessage = '';
         if ($shopuiid) {
+            if ($shopuiid['Shopuiid']['shop_id'] != $data['shop_id']) {
+                return array(
+                    'status' => 'NG',
+                    'message' => 'UIIDは他の店舗で登録してしまいました',
+                );
+            }
+            $isNew = true;
             $this->id = $shopuiid['Shopuiid']['id'];
             $requestData = array(
                 'status' => 1,
             );
-            if ($this->save($requestData)) {
-                return array(
-                    'status' => 'OK',
-                    'message' => 'UIIDは既存しました',
-                );
-            }
-            return array(
-                'status' => 'NG',
-                'message' => $this->Shopuiid->invalidFields(),
+            $successMessage = 'UIIDは既存しました';
+        } else {
+            $this->create();
+            $requestData = array(
+                'shop_id'   =>   $data['shop_id'],
+                'uiid'      =>   $data['uiid'],
+                'status'    =>   1,
+                'create_at' =>   date('Y-m-d H:i:s')
             );
+            $successMessage = 'データ登録が完了いたしました';
         }
-        $this->create();
-        $requestData = array(
-            'shop_id'   =>   $data['shop_id'],
-            'uiid'      =>   $data['uiid'],
-            'status'    =>   1,
-            'create_at' =>   date('Y-m-d H:i:s')
-        );
+        
         if ($this->save($requestData)) {
             return array(
                 'status' => 'OK',
-                'message' => 'データ登録が完了いたしました',
+                'message' => $successMessage,
             );
         }
         
