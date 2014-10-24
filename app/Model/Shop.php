@@ -183,4 +183,19 @@ class Shop extends AppModel {
 //        // fallback to our parent
 //        return parent::beforeSave($options);
 //    }
+
+    public function findByCondition($condition) {
+        $shopConditions = array();
+        foreach ($condition as $k => $v) {
+            $shopConditions['Shop.' . $k] = $v;
+        }
+        $shop = $this->find('first', array(
+            'conditions' => $shopConditions
+        ));
+        if (empty($shop)) {
+            return false;
+        }
+        
+        return $shop;
+    }
 }
