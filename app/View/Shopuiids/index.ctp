@@ -31,7 +31,7 @@
                     <span class="label label-danger">Inactive</span>
                     <?php endif; ?>
                 </td>
-                <td><?php echo $this->Time->niceShort($shopuiid['Shopuiid']['created_at']); ?></td>
+                <td><?php echo $shopuiid['Shopuiid']['created_at'] ? $this->Time->niceShort($shopuiid['Shopuiid']['created_at']) : ''; ?></td>
                 <td class="text-center">
                     <?=$this->Html->link('編集', array('action' => 'edit', $shopuiid['Shopuiid']['id']), array('class' => 'btn btn-info'))?>
                     <button title="削除" class="btn btn-danger" id="deleteButton<?=$shopuiid['Shopuiid']['id']?>" onclick="removeShopuiidById(<?=$shopuiid['Shopuiid']['id']?>)">削除</button>

@@ -73,11 +73,11 @@
         </tr>
         <tr>
             <td scope="row">Created At</td>
-            <td><?=$this->Time->niceShort($shop['Shop']['created_at'])?></td>
+            <td><?php echo $shop['Shop']['created_at'] ? $this->Time->niceShort($shop['Shop']['created_at']) : ''?></td>
         </tr>
         <tr>
             <td scope="row">Updated At</td>
-            <td><?=$this->Time->niceShort($shop['Shop']['updated_at'])?></td>
+            <td><?php echo $shop['Shop']['updated_at'] ? $this->Time->niceShort($shop['Shop']['updated_at']) : '';?></td>
         </tr>
     </table>
 <p class="text-center"><?=$this->Html->link("編集", array('action' => 'edit', $shop['Shop']['id']), array('escape' => false, 'class' => 'btn btn-info'))?></p>

@@ -38,7 +38,10 @@ class ShopsController extends AppController {
     public function add() {
         if ($this->request->is('post')) {
             $this->Shop->create();
-            if ($this->Shop->save($this->request->data)) {
+            $data = $this->request->data;
+            $data['Shop']['created_at'] = date('Y-m-d H:i:s');
+            $data['Shop']['updated_at'] = date('Y-m-d H:i:s');
+            if ($this->Shop->save($data)) {
                 $this->Session->setFlash(__('Your shop has been saved.'));
                 return $this->redirect(array('action' => 'index'));
             }
@@ -58,7 +61,9 @@ class ShopsController extends AppController {
 
         if ($this->request->is(array('post', 'put'))) {
             $this->Shop->id = $id;
-            if ($this->Shop->save($this->request->data)) {
+            $data = $this->request->data;
+            $data['Shop']['updated_at'] = date('Y-m-d H:i:s');
+            if ($this->Shop->save($data)) {
                 $this->Session->setFlash(__('Your shop has been updated.'));
                 return $this->redirect(array('action' => 'index'));
             }

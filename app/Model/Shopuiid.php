@@ -49,7 +49,7 @@ class Shopuiid extends AppModel {
                 'shop_id'   =>   $data['shop_id'],
                 'uiid'      =>   $data['uiid'],
                 'status'    =>   1,
-                'create_at' =>   date('Y-m-d H:i:s')
+                'created_at' =>   date('Y-m-d H:i:s')
             );
             $successMessage = 'データ登録が完了いたしました';
         }

@@ -28,7 +28,7 @@
                 <td><?=$this->Html->link($shop['Shop']['login_id'], array('action' => 'view', $shop['Shop']['id']))?></td>
                 <td><?=$shop['Shop']['name']?></td>
                 <td><?=$shop['Shop']['email']?></td>
-                <td><?php echo $this->Time->niceShort($shop['Shop']['created_at']); ?></td>
+                <td><?php echo $shop['Shop']['created_at'] ? $this->Time->niceShort($shop['Shop']['created_at']) : ''; ?></td>
                 <td class="text-center">
                     <?=$this->Html->link('編集', array('action' => 'edit', $shop['Shop']['id']), array('class' => 'btn btn-info'))?>
                     <button title="削除" class="btn btn-danger" id="deleteButton<?=$shop['Shop']['id']?>" onclick="removeShopById(<?=$shop['Shop']['id']?>)">削除</button>
