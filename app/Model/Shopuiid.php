@@ -24,21 +24,23 @@ class Shopuiid extends AppModel {
     }
 
     public function checkAndSave($data) {
-        $shopuiid = $this->findByUiid($data['uiid']);
-        $isNew = false;
-        $requestData = array();
-        $successMessage = '';
+        $checkuiid = $this->findByUiid($data['uiid']);
+        if ($checkuiid && ($checkuiid['Shopuiid']['shop_id'] != $data['shop_id'])) {
+            return array(
+                'status' => 'NG',
+                'message' => 'UIIDは他の店舗で登録してしまいました',
+            );
+        }
+        $shopuiid = $this->find('first', array(
+            'conditions' => array(
+                'Shopuiid.shop_id' => $data['shop_id'],
+            )
+        ));
         if ($shopuiid) {
-            if ($shopuiid['Shopuiid']['shop_id'] != $data['shop_id']) {
-                return array(
-                    'status' => 'NG',
-                    'message' => 'UIIDは他の店舗で登録してしまいました',
-                );
-            }
-            $isNew = true;
             $this->id = $shopuiid['Shopuiid']['id'];
             $requestData = array(
-                'status' => 1,
+                'uiid'      =>   $data['uiid'],
+                'status'    =>   1,
             );
             $successMessage = 'UIIDは既存しました';
         } else {
