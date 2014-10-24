@@ -57,26 +57,13 @@ class ApiController extends AppController {
                 'message' => __('Shop not found'),
             ));
         }
-        $this->Shopuiid->create();
         $shop_uiid_data = array(
-            'Shopuiid' => array(
-                'shop_id'   =>   $shop['Shop']['id'],
-                'uiid'      =>   $data['uiid'],
-                'status'    =>   1,
-                'create_at' =>   date('Y-m-d H:i:s')
-            )
+            'shop_id'   =>   $shop['Shop']['id'],
+            'uiid'      =>   $data['uiid'],
         );
-        if ($this->Shopuiid->save($shop_uiid_data)) {
-            return $this->_responseJson(array(
-                'status' => 'OK',
-                'message' => 'データ登録が完了いたしました',
-            ));
-        } else {
-            return $this->_responseJson(array(
-                'status' => 'NG',
-                'message' => $this->Shopuiid->invalidFields(),
-            ));
-        }
+        $responseData = $this->Shopuiid->checkAndSave($shop_uiid_data);
+        
+        return $this->_responseJson($responseData);
     }
 
     public function getSendUrl($UIID) {
