@@ -1,7 +1,7 @@
 <?php
 
 class ApiController extends AppController {
-    public $uses = array('Shop', 'Shopuiid');
+    public $uses = array('Shop', 'Shopuiid', 'TrstAppVersion');
 
     public $components = array('Json');
 
@@ -77,5 +77,26 @@ class ApiController extends AppController {
         }
 
         $this->render('default_api');
+    }
+
+    public function getLatestVersion() {
+        if (!$this->request->is('get')) {
+            return $this->_responseJson(array(
+                'status' => 'NG',
+                'message' => __('Method not allowed'),
+            ));
+        }
+        try {
+            $version = $this->TrstAppVersion->getLatestVersion();
+        } catch (CakeException $e) {
+            return $this->_responseJson(array(
+                'status' => 'NG',
+                'message' => $e->getMessage(),
+            ));
+        }
+
+        return $this->_responseJson(array(
+            'version' => $version,
+        ));
     }
 }
