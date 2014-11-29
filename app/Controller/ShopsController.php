@@ -67,25 +67,28 @@ class ShopsController extends AppController {
                 );
                 $this->UserShop->save($addUserShop);
                 if ($data['Shop']['role'] != Users::SHOP) {
-                    // foreach ($data['Shop']['shop_id'] as $key => $shop_id) {
-                    //     $this->UserShop->create();
-                    //     $addUserShop = array(
-                    //         'user_id' => $this->Users->getLastInsertId(),
-                    //         'shop_id' => $shop_id,
-                    //         'created_at' => $data['Shop']['created_at'],
-                    //         'updated_at' => $data['Shop']['updated_at']
-                    //     );
-                    //     $this->UserShop->save($addUserShop);
-                    // }
-                    $this->Session->setFlash(__('Your shop has been saved.'));
-                    return $this->redirect(array('action' => 'add_owner/'.$user_id));
+                    foreach ($data['Shop']['shop_id'] as $key => $shop_id) {
+                        $this->UserShop->create();
+                        $addUserShop = array(
+                            'user_id' => $this->Users->getLastInsertId(),
+                            'shop_id' => $shop_id,
+                            'created_at' => $data['Shop']['created_at'],
+                            'updated_at' => $data['Shop']['updated_at']
+                        );
+                        $this->UserShop->save($addUserShop);
+                    }
+                    // $this->Session->setFlash(__('Your shop has been saved.'));
+                    // return $this->redirect(array('action' => 'add_owner/'.$user_id));
 
                 };
                 $this->Session->setFlash(__('Your shop has been saved.'));
                 return $this->redirect(array('action' => 'index'));
             }
+
             $this->Session->setFlash(__('Unable to add your shop.'));
         }
+        $list_shop = $this->Shop->find('list', array( 'fields'  => array('id','name')));
+        $this->set('list_shop', $list_shop);
     }
 
     public function add_owner($user_id) {

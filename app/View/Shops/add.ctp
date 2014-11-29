@@ -58,7 +58,7 @@
             'class' => 'form-control',
         ));
         ?>
-<?php if(false) :?>
+
         <div class="form-group" id="shopBox" style="display:none">
             <label for="ShopShop" class="control-label col-xs-3">Shop</label>
             <div class="col-xs-6">
@@ -76,7 +76,7 @@
             </table>
             </div>
         </div>
-<?php endif;?>
+
         <div class="form-group">
             <?php
             echo $this->Form->submit(__('Submit'), array(
@@ -93,7 +93,7 @@
 </div>
 <script>
 $('#ShopRole').change(function(){
-    if($('#ShopShop').val() != 1){
+    if($('#ShopRole').val() != 0){
         $('#shopBox').css('display','');
     } else {
         $('#shopBox').css('display','none');
