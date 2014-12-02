@@ -2,7 +2,7 @@
     <div class="panel-heading clearfix">
         <h3 class="panel-title pull-left" style="padding-top: 7.5px;">User - Shop</h3>
         <div class="btn-group pull-right">
-            <?=$this->Html->link("Add Shop", array('action' => 'add'), array('escape' => false, 'class' => 'btn btn-success'))?>
+            <?=$this->Html->link("Add User - Shop", array('action' => 'add'), array('escape' => false, 'class' => 'btn btn-success'))?>
         </div>
     </div>
 <div class="panel-body">

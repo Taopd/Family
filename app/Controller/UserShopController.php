@@ -52,8 +52,7 @@ class UserShopController extends AppController {
     public function add() {
         if ($this->request->is('post')) {
             $user = $this->Users->find('first', array('recursive' => -1, 'conditions' => array('id' => $this->request->data['UserShop']['user_id'])));
-
-            if ($user['User']['role'] == User::SHOP) {
+            if ($user['Users']['role'] == Users::SHOP) {
                 $checkUser = $this->UserShop->find('list', array('recursive' => -1, 'conditions' => array('user_id' => $this->request->data['UserShop']['user_id'])));
                 if (!empty($checkUser)) {
                     $this->Session->setFlash(__('この店舗は一つの店舗しか使えません.'));
