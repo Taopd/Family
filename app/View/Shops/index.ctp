@@ -9,8 +9,8 @@
         <table class="table table-hover">
             <thead>
                 <th>#</th>
-                <th>Login ID</th>
                 <th>Name</th>
+                <th>Login ID</th>                
                 <th>Email</th>
                 <th>Created At</th>
                 <th class="text-center">操作</th>
@@ -25,8 +25,8 @@
             ?>
             <tr>
                 <td><?=$no?></td>
-                <td><?=$this->Html->link($shop['Shop']['login_id'], array('action' => 'view', $shop['Shop']['id']))?></td>
-                <td><?=$shop['Shop']['name']?></td>
+                <td><?=$this->Html->link($shop['Shop']['name'], array('action' => 'view', $shop['Shop']['id']))?></td>
+                <td><?=$shop['Shop']['login_id']?></td>
                 <td><?=$shop['Shop']['email']?></td>
                 <td><?php echo $shop['Shop']['created_at'] ? $this->Time->niceShort($shop['Shop']['created_at']) : ''; ?></td>
                 <td class="text-center">
