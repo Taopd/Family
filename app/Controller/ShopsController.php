@@ -45,27 +45,6 @@ class ShopsController extends AppController {
             $data['Shop']['created_at'] = date('Y-m-d H:i:s');
             $data['Shop']['updated_at'] = date('Y-m-d H:i:s');
             if ($this->Shop->save($data)) {
-
-                $addUser = array(
-                    'name' => $data['Shop']['name'],
-                    'username' => $data['Shop']['login_id'],
-                    'password' => $data['Shop']['password'],
-                    'role'  => $data['Shop']['role'],
-                    'created_at' => $data['Shop']['created_at'],
-                    'updated_at' => $data['Shop']['updated_at']
-                    );
-                $this->Users->create();                
-                $this->Users->save($addUser);
-
-                $user_id = $this->Users->getLastInsertId();
-                $this->UserShop->create();
-                $addUserShop = array(
-                    'user_id' => $user_id,
-                    'shop_id' => $this->Shop->getLastInsertId(),
-                    'created_at' => $data['Shop']['created_at'],
-                    'updated_at' => $data['Shop']['updated_at']
-                );
-                $this->UserShop->save($addUserShop);
                 $addFee = array(
                     'fee_id' => 1,
                     'shop_id' => $this->Shop->getLastInsertId(),
@@ -77,21 +56,6 @@ class ShopsController extends AppController {
                 $this->Fee->create();                
                 $this->Fee->save($addFee);
 
-                if ($data['Shop']['role'] != Users::SHOP) {
-                    foreach ($data['Shop']['shop_id'] as $key => $shop_id) {
-                        $this->UserShop->create();
-                        $addUserShop = array(
-                            'user_id' => $this->Users->getLastInsertId(),
-                            'shop_id' => $shop_id,
-                            'created_at' => $data['Shop']['created_at'],
-                            'updated_at' => $data['Shop']['updated_at']
-                        );
-                        $this->UserShop->save($addUserShop);
-                    }
-                    // $this->Session->setFlash(__('Your shop has been saved.'));
-                    // return $this->redirect(array('action' => 'add_owner/'.$user_id));
-
-                };
                 $this->Session->setFlash(__('Your shop has been saved.'));
                 return $this->redirect(array('action' => 'index'));
             }

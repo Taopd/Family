@@ -37,6 +37,10 @@ class Shop extends AppModel {
                 'message' => 'Name is required.',
                 'allowEmpty' => false
             ),
+            'unique' => array(
+                'rule' => array('isUniqueName'),
+                'message' => 'This Name is already in use.'
+            ),
         ),
         'email' => array(
             'required' => array(
@@ -105,6 +109,31 @@ class Shop extends AppModel {
                 ),
                 'conditions' => array(
                     'Shop.login_id' => $check['login_id']
+                )
+            )
+        );
+        if (!empty($login_id)) {
+            if (isset($this->data[$this->alias]['id']) && ($this->data[$this->alias]['id'] == $login_id['Shop']['id'])) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    function isUniqueName($check) {
+
+        $login_id = $this->find(
+            'first',
+            array(
+                'fields' => array(
+                    'Shop.id',
+                    'Shop.name'
+                ),
+                'conditions' => array(
+                    'Shop.name' => $check['name']
                 )
             )
         );

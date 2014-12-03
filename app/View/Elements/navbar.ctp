@@ -13,6 +13,7 @@
         <li><?=$this->Html->link('Shops', array('controller' => 'shops', 'action' => 'index'))?></li>
         <li><?=$this->Html->link('Shop UIIDs', array('controller' => 'shopuiids', 'action' => 'index'))?></li>
         <li><?=$this->Html->link('User Shop', array('controller' => 'UserShop', 'action' => 'index'))?></li>
+        <li><?=$this->Html->link('User', array('controller' => 'Users', 'action' => 'index'))?></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
