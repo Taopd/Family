@@ -13,7 +13,7 @@ class ShopsController extends AppController {
         )
     );
 
-    public $uses = array('Users','Shop','UserShop');
+    public $uses = array('Users','Shop','UserShop','Fee');
 
     public function index() {
         $this->Paginator->settings = $this->paginate;
@@ -66,6 +66,17 @@ class ShopsController extends AppController {
                     'updated_at' => $data['Shop']['updated_at']
                 );
                 $this->UserShop->save($addUserShop);
+                $addFee = array(
+                    'fee_id' => 1,
+                    'shop_id' => $this->Shop->getLastInsertId(),
+                    'fee_type' => 2,
+                    'name' => '日払い',
+                    'created_at' => $data['Shop']['created_at'],
+                    'updated_at' => $data['Shop']['updated_at']
+                );
+                $this->Fee->create();                
+                $this->Fee->save($addFee);
+
                 if ($data['Shop']['role'] != Users::SHOP) {
                     foreach ($data['Shop']['shop_id'] as $key => $shop_id) {
                         $this->UserShop->create();
