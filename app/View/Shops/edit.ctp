@@ -26,32 +26,6 @@
             'after' => '</div>',
             'class' => 'form-control',
         ));
-        echo $this->Form->input('email', array(
-            'type' => 'email',
-            'div' => 'form-group',
-            'label' => array('class' => 'control-label col-xs-3', 'text' => 'Email'),
-            'between' => '<div class="col-xs-3">',
-            'after' => '</div>',
-            'class' => 'form-control',
-        ));
-        echo $this->Form->input('password_update', array(
-            'type' => 'password',
-            'div' => 'form-group',
-            'label' => array('class' => 'control-label col-xs-3', 'text' => 'Password'),
-            'between' => '<div class="col-xs-3">',
-            'after' => '</div>',
-            'class' => 'form-control',
-            'required' => false,
-        ));
-        echo $this->Form->input('password_update_confirm', array(
-            'type' => 'password',
-            'div' => 'form-group',
-            'label' => array('class' => 'control-label col-xs-3', 'text' => 'Confirm Password'),
-            'between' => '<div class="col-xs-3">',
-            'after' => '</div>',
-            'class' => 'form-control',
-            'required' => false,
-        ));
         ?>
         <div class="form-group">
             <?php
