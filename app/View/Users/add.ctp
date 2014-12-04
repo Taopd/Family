@@ -1,3 +1,5 @@
+  <link rel="stylesheet" href="/css/chosen.css">
+
 <div class="panel panel-primary">
     <div class="panel-heading clearfix">
         <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Add User</h3>
@@ -47,25 +49,38 @@
             'label' => array('class' => 'control-label col-xs-3', 'text' => 'Role'),
             'between' => '<div class="col-xs-3">',
             'after' => '</div>',
+            'selected' => '1',
             'class' => 'form-control',
         ));
         ?>
 
-        <div class="form-group" id="shopBox" style="display:none">
+        <div class="form-group" id="shopBox" style="display:block">
             <label for="ShopShop" class="control-label col-xs-3">Shop</label>
             <div class="col-xs-6">
-            <input type="hidden" name="data[Shop][shop_id]" value="" id="ShopShop">
-            <table>
-                <?php $index = 0 ;foreach ($list_shop as $key => $value) :?>
-                    <?php if ($index % 4 == 0 ) : ?> <tr> <?php endif;?>
-                    <td>
-                        &nbsp;<input type="checkbox" name="data[Shop][shop_id][]" value="<?php echo $key; ?>" id="ShopShop<?php echo $key; ?>"/>
-                        &nbsp;<label for="ShopShop<?php echo $key; ?>"><?php echo $value;?></label>
-                    </td>
-                    <?php if ($index % 4 == 0 ) : ?> </tr> <?php endif;?>
-                    <?php $index ++;?>
-                <?php endforeach;?>
-            </table>
+                <?php echo $this->Form->input('list_shop', array(
+                    'options' => $list_shop,
+                    'class' => "chosen-select",
+                    'data-placeholder' => "Choose a shop..." ,
+                    'multiple' => true,
+                    'style' => "width:210px;",
+                    'tabindex' => 3,
+                    'label' => false,
+                    'div' => false
+                ));?>
+            </div>
+        </div>
+
+        <div class="form-group" id="shopBoxMuti" style="display:none">
+            <label for="ShopShop" class="control-label col-xs-3">Shop</label>
+            <div class="col-xs-6">
+                <?php echo $this->Form->input('shop', array(
+                    'empty' => '- Choose shop -',
+                    'options' => $list_shop,
+                    'class' => 'form-control',
+                    'data-placeholder' => "Choose a shop..." ,
+                    'style' => "width:210px;",
+                    'label' => false,
+                ));?>
             </div>
         </div>
 
@@ -83,12 +98,27 @@
         ?>
     </div>
 </div>
+  <script src="/js/chosen.jquery.js" type="text/javascript"></script>
+  <script src="/js/prism.js" type="text/javascript" charset="utf-8"></script>
 <script>
+    var config = {
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"95%"}
+    }
+    for (var selector in config) {
+      $(selector).chosen(config[selector]);
+    }
+
 $('#UsersRole').change(function(){
-    if($('#UsersRole').val() != 0){
-        $('#shopBox').css('display','');
-    } else {
+    if($('#UsersRole').val() == 0){
+        $('#shopBoxMuti').css('display','block');
         $('#shopBox').css('display','none');
+    } else {
+        $('#shopBoxMuti').css('display','none');
+        $('#shopBox').css('display','block');
     }
 });
 </script>

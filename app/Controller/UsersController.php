@@ -57,7 +57,7 @@ class UsersController extends AppController {
             $data['Users']['updated_at'] = date('Y-m-d H:i:s');
             if ($this->Users->save($data)) {
                 if ($data['Users']['role'] != Users::SHOP) {
-                    foreach ($data['Shop']['shop_id'] as $key => $shop_id) {
+                    foreach ($data['Users']['list_shop'] as $key => $shop_id) {
                         $this->UserShop->create();
                         $addUserShop = array(
                             'user_id' => $this->Users->getLastInsertId(),
@@ -67,14 +67,23 @@ class UsersController extends AppController {
                         );
                         $this->UserShop->save($addUserShop);
                     }
-                    // $this->Session->setFlash(__('Your shop has been saved.'));
-                    // return $this->redirect(array('action' => 'add_owner/'.$user_id));
-
+                } else {
+                    if ($data['Users']['shop'] != null) {
+                        $this->UserShop->create();
+                        $addUserShop = array(
+                            'user_id' => $this->Users->getLastInsertId(),
+                            'shop_id' => $data['Users']['shop'],
+                            'created_at' => $data['Users']['created_at'],
+                            'updated_at' => $data['Users']['updated_at']
+                        );
+                        $this->UserShop->save($addUserShop);
+                    }
+                    
                 };
-                $this->Session->setFlash(__('Your shop has been saved.'));
+                $this->Session->setFlash(__('Your user has been saved.'));
                 return $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('Unable to add your shop.'));
+            $this->Session->setFlash(__('Unable to add your user.'));
         }
         $list_shop = $this->Shop->find('list', array( 'fields'  => array('id','name')));
         $this->set('list_shop', $list_shop);
