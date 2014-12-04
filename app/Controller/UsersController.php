@@ -116,15 +116,15 @@ class UsersController extends AppController {
  * @return void
  */
     public function delete($id = null) {
-        $this->UserShop->id = $id;
-        if (!$this->UserShop->exists()) {
-            throw new NotFoundException(__('Invalid UserShop'));
+        $this->Users->id = $id;
+        if (!$this->Users->exists()) {
+            throw new NotFoundException(__('Invalid User'));
         }
         $this->request->onlyAllow('post', 'delete');
-        if ($this->UserShop->delete()) {
-            $this->Session->setFlash(__('The UserShop has been deleted.'));
+        if ($this->Users->delete()) {
+            $this->Session->setFlash(__('The User has been deleted.'));
         } else {
-            $this->Session->setFlash(__('The UserShop could not be deleted. Please, try again.'));
+            $this->Session->setFlash(__('The User could not be deleted. Please, try again.'));
         }
         return $this->redirect(array('action' => 'index'));
     }
