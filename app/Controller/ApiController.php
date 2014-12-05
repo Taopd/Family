@@ -20,7 +20,7 @@ class ApiController extends AppController {
 
     private function _validateDataRegisterShop($data) {
         $validation_params = array(
-            'username', 'password', 'uiid'
+            'login_id', 'password', 'uiid'
         );
         $errors = array();
         foreach ($validation_params as $v) {
@@ -48,7 +48,7 @@ class ApiController extends AppController {
             ));
         }
         $users = $this->Users->findByCondition(array(
-            'username' => $data['username'],
+            'username' => $data['login_id'],
             'password' => $data['password'],
         ));
         if (!$users) {
