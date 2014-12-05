@@ -8,14 +8,6 @@
     <div class="panel-body">
         <?php echo $this->Form->create('Shop', array('class' => 'form-horizontal'));?>
         <?php
-        echo $this->Form->input('login_id', array(
-            'type' => 'text',
-            'div' => 'form-group',
-            'label' => array('class' => 'control-label col-xs-3', 'text' => 'Login ID'),
-            'between' => '<div class="col-xs-3">',
-            'after' => '</div>',
-            'class' => 'form-control',
-        ));
         echo $this->Form->input('name', array(
             'type' => 'text',
             'div' => 'form-group',
@@ -24,30 +16,7 @@
             'after' => '</div>',
             'class' => 'form-control',
         ));
-        echo $this->Form->input('email', array(
-            'type' => 'email',
-            'div' => 'form-group',
-            'label' => array('class' => 'control-label col-xs-3', 'text' => 'Email'),
-            'between' => '<div class="col-xs-3">',
-            'after' => '</div>',
-            'class' => 'form-control',
-        ));
-        echo $this->Form->input('password', array(
-            'type' => 'password',
-            'div' => 'form-group',
-            'label' => array('class' => 'control-label col-xs-3', 'text' => 'Password'),
-            'between' => '<div class="col-xs-3">',
-            'after' => '</div>',
-            'class' => 'form-control',
-        ));
-        echo $this->Form->input('password_confirm', array(
-            'type' => 'password',
-            'div' => 'form-group',
-            'label' => array('class' => 'control-label col-xs-3', 'text' => 'Confirm Password'),
-            'between' => '<div class="col-xs-3">',
-            'after' => '</div>',
-            'class' => 'form-control',
-        ));
+        
         ?>
 
         <div class="form-group">

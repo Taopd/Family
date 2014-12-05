@@ -10,27 +10,7 @@ class Shop extends AppModel {
         ),
     );
 
-    public $validate = array(
-        'login_id' => array(
-            'nonEmpty' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'Login ID is required.',
-                'allowEmpty' => false
-            ),
-            'between' => array(
-                'rule' => array('between', 5, 15),
-                'required' => true,
-                'message' => 'Login ID must be between 5 to 15 characters.'
-            ),
-            'unique' => array(
-                'rule' => array('isUniqueUsername'),
-                'message' => 'This Login ID is already in use.'
-            ),
-            'alphaNumericDashUnderscore' => array(
-                'rule' => array('alphaNumericDashUnderscore'),
-                'message' => 'Login ID can only be letters, numbers and underscores.'
-            ),
-        ),
+    public $validate = array(        
         'name' => array(
             'nonEmpty' => array(
                 'rule' => array('notEmpty'),
@@ -42,55 +22,6 @@ class Shop extends AppModel {
                 'message' => 'This Name is already in use.'
             ),
         ),
-        'email' => array(
-            'required' => array(
-                'rule' => array('email', true),
-                'message' => 'Please provide a valid email address.'
-            ),
-             'unique' => array(
-                'rule'    => array('isUniqueEmail'),
-                'message' => 'This email is already in use.',
-            ),
-            'between' => array(
-                'rule' => array('between', 6, 60),
-                'message' => 'Email must be between 6 to 60 characters.'
-            )
-        ),
-        'password' => array(
-            'required' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A password is required.'
-            ),
-            'min_length' => array(
-                'rule' => array('minLength', '6'),
-                'message' => 'Password must have a mimimum of 6 characters.'
-            )
-        ),
-        'password_confirm' => array(
-            'required' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'Please confirm your password.'
-            ),
-             'equaltofield' => array(
-                'rule' => array('equaltofield', 'password'),
-                'message' => 'Both passwords must match.'
-            )
-        ),
-        'password_update' => array(
-            'min_length' => array(
-                'rule' => array('minLength', '6'),
-                'message' => 'Password must have a mimimum of 6 characters',
-                'allowEmpty' => true,
-                'required' => false
-            )
-        ),
-        'password_confirm_update' => array(
-             'equaltofield' => array(
-                'rule' => array('equaltofield','password_update'),
-                'message' => 'Both passwords must match.',
-                'required' => false,
-            )
-        )
     );
 
     /**
