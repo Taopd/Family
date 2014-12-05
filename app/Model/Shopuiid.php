@@ -1,5 +1,7 @@
 <?php
-
+App::uses('Users', 'Model');
+App::uses('UserShop', 'Model');
+App::uses('Shop', 'Model');
 App::uses('AuthComponent', 'Controller/Component');
 
 class Shopuiid extends AppModel {
@@ -25,7 +27,19 @@ class Shopuiid extends AppModel {
 
     public function checkAndSave($data) {
         $checkuiid = $this->findByUiid($data['uiid']);
-        if ($checkuiid && ($checkuiid['Shopuiid']['shop_id'] != $data['shop_id'])) {
+        $users = new Users();
+        $userShop = new UserShop();
+        $shop = new Shop();
+        $user = $users->find('first', array('recursive' => -1,'conditions' => array('id' => $data['user_id'])));
+        if ($user['Users']['role'] != 0) {
+            return array(
+                'status' => 'NG',
+                'message' => 'User is not Shop',
+            );
+        }
+        $userShop = $userShop->find('first', array('recursive' => -1, 'conditions' => array('user_id' => $user['Users']['id'])));
+        $shop = $shop->find('first', array('recursive' => -1, 'conditions' => array('id' => $userShop['UserShop']['shop_id'])));
+        if ($checkuiid && ($checkuiid['Shopuiid']['shop_id'] != $shop['Shop']['id'])) {
             return array(
                 'status' => 'NG',
                 'message' => 'UIIDは他の店舗で登録してしまいました',
@@ -33,7 +47,7 @@ class Shopuiid extends AppModel {
         }
         $shopuiid = $this->find('first', array(
             'conditions' => array(
-                'Shopuiid.shop_id' => $data['shop_id'],
+                'Shopuiid.shop_id' => $shop['Shop']['id'],
             )
         ));
         if ($shopuiid) {
@@ -46,7 +60,7 @@ class Shopuiid extends AppModel {
         } else {
             $this->create();
             $requestData = array(
-                'shop_id'   =>   $data['shop_id'],
+                'shop_id'   =>   $shop['Shop']['id'],
                 'uiid'      =>   $data['uiid'],
                 'status'    =>   1,
                 'created_at' =>   date('Y-m-d H:i:s')

@@ -143,5 +143,19 @@ class Users extends AppModel {
         return $this->data[$this->name][$otherfield] === $this->data[$this->name][$fname];
     }
 
+    public function findByCondition($condition) {
+        $shopConditions = array();
+        foreach ($condition as $k => $v) {
+            $shopConditions['Users.' . $k] = $v;
+        }
+        $user = $this->find('first', array(
+            'conditions' => $shopConditions
+        ));
+        if (empty($user)) {
+            return false;
+        }        
+        return $user;
+    }
+
 
 }

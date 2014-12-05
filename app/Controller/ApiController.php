@@ -1,7 +1,7 @@
 <?php
 
 class ApiController extends AppController {
-    public $uses = array('Shop', 'Shopuiid', 'TrstAppVersion');
+    public $uses = array('Shop', 'Shopuiid', 'TrstAppVersion','Users');
 
     public $components = array('Json');
 
@@ -20,7 +20,7 @@ class ApiController extends AppController {
 
     private function _validateDataRegisterShop($data) {
         $validation_params = array(
-            'login_id', 'password', 'uiid'
+            'username', 'password', 'uiid'
         );
         $errors = array();
         foreach ($validation_params as $v) {
@@ -47,18 +47,18 @@ class ApiController extends AppController {
                 'message' => $errors,
             ));
         }
-        $shop = $this->Shop->findByCondition(array(
-            'login_id' => $data['login_id'],
+        $users = $this->Users->findByCondition(array(
+            'username' => $data['username'],
             'password' => $data['password'],
         ));
-        if (!$shop) {
+        if (!$users) {
             return $this->_responseJson(array(
                 'status' => 'NG',
-                'message' => __('Shop not found'),
+                'message' => __('Users not found'),
             ));
         }
         $shop_uiid_data = array(
-            'shop_id'   =>   $shop['Shop']['id'],
+            'user_id'   =>   $users['Users']['id'],
             'uiid'      =>   $data['uiid'],
         );
         $responseData = $this->Shopuiid->checkAndSave($shop_uiid_data);
