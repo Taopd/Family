@@ -50,6 +50,17 @@ class Users extends AppModel {
                 'message' => 'Login ID can only be letters, numbers and underscores.'
             ),
         ),
+        'email' => array(
+            'nonEmpty' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Email is required.',
+                'allowEmpty' => false
+            ),
+            'unique' => array(
+                'rule' => array('isUniqueEmail'),
+                'message' => 'This Email is already in use.'
+            )
+        ),
         'name' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
@@ -123,6 +134,31 @@ class Users extends AppModel {
         );
         if (!empty($username)) {
             if (isset($this->data[$this->alias]['id']) && ($this->data[$this->alias]['id'] == $username['Users']['id'])) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    function isUniqueEmail($check) {
+
+        $email = $this->find(
+            'first',
+            array(
+                'fields' => array(
+                    'Users.id',
+                    'Users.email'
+                ),
+                'conditions' => array(
+                    'Users.email' => $check['email']
+                )
+            )
+        );
+        if (!empty($email)) {
+            if (isset($this->data[$this->alias]['id']) && ($this->data[$this->alias]['id'] == $email['Users']['id'])) {
                 return true;
             } else {
                 return false;

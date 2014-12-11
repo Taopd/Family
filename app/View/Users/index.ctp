@@ -11,6 +11,7 @@
         <tr>
             <th class="selector">名前</th>
             <th class="selector">LoginID</th>
+            <th class="selector">Email</th>
             <th class="selector">ユーザータイプ</th>
             <th class="actions"><?php echo __('操作'); ?></th>
         </tr>
@@ -20,6 +21,7 @@
         <tr>
             <td><?php echo h($user['Users']['name']); ?>&nbsp;</td>
             <td><?php echo h($user['Users']['username']); ?>&nbsp;</td>
+            <td><?php echo h($user['Users']['email']); ?>&nbsp;</td>
             <td><?php echo $role[$user['Users']['role']]; ?>&nbsp;</td>
             <td class="actions">
                 <?php echo $this->Html->link(__('編集'), array('action' => 'edit', $user['Users']['id'])); ?>

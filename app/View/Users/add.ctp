@@ -42,7 +42,15 @@
             'between' => '<div class="col-xs-3">',
             'after' => '</div>',
             'class' => 'form-control',
-        ));        
+        ));     
+        echo $this->Form->input('email', array(
+            'type' => 'text',
+            'div' => 'form-group',
+            'label' => array('class' => 'control-label col-xs-3', 'text' => 'Email'),
+            'between' => '<div class="col-xs-3">',
+            'after' => '</div>',
+            'class' => 'form-control',
+        ));   
         echo $this->Form->input('role', array(
             'options' => array('0' => '店舗', '1' => 'エリアマネージャ','2' => 'オーナー'),
             'div' => 'form-group',
