@@ -12,16 +12,8 @@
             <td><?=$shop['Shop']['id']?></td>
         </tr>
         <tr>
-            <td scope="row">Login ID</td>
-            <td><?=$shop['Shop']['login_id']?></td>
-        </tr>
-        <tr>
             <td scope="row">Name</td>
             <td><?=$shop['Shop']['name']?></td>
-        </tr>
-        <tr>
-            <td scope="row">Email</td>
-            <td><?=$shop['Shop']['email']?></td>
         </tr>
         <tr>
             <td scope="row">Role</td>

@@ -9,14 +9,7 @@
         <?php echo $this->Form->create('Shop', array('class' => 'form-horizontal'));?>
         <?php
         echo $this->Form->hidden('id', array('value' => $this->data['Shop']['id']));
-        echo $this->Form->hidden('login_id', array('value' => $this->data['Shop']['login_id']));
         ?>
-        <div class="form-group">
-            <label class="control-label col-xs-3">Login ID</label>
-            <div class="col-xs-9">
-                <p class="form-control-static"><?=$this->data['Shop']['login_id']?></p>
-            </div>
-        </div>
         <?php
         echo $this->Form->input('name', array(
             'type' => 'text',

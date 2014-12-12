@@ -22,7 +22,7 @@
             ?>
             <tr>
                 <td><?=$no?></td>
-                <td><?=$this->Html->link($shopuiid['Shop']['login_id'], array('controller' => 'shops', 'action' => 'view', $shopuiid['Shop']['id']))?></td>
+                <td><?=$this->Html->link($shopuiid['Shop']['name'], array('controller' => 'shops', 'action' => 'view', $shopuiid['Shop']['id']))?></td>
                 <td><?=$shopuiid['Shopuiid']['uiid']?></td>
                 <td>
                     <?php if ($shopuiid['Shopuiid']['status']):?>
