@@ -31,12 +31,12 @@ class Shopuiid extends AppModel {
         $userShop = new UserShop();
         $shop = new Shop();
         $user = $users->find('first', array('recursive' => -1,'conditions' => array('id' => $data['user_id'])));
-        if ($user['Users']['role'] != 0) {
-            return array(
-                'status' => 'NG',
-                'message' => 'User is not Shop',
-            );
-        }
+//        if ($user['Users']['role'] != 0) {
+//            return array(
+//                'status' => 'NG',
+//                'message' => 'User is not Shop',
+//            );
+//        }
         $userShop = $userShop->find('first', array('recursive' => -1, 'conditions' => array('user_id' => $user['Users']['id'])));
         if (empty($userShop['UserShop']['shop_id'])) {
             return array(
