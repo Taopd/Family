@@ -38,7 +38,19 @@ class Shopuiid extends AppModel {
             );
         }
         $userShop = $userShop->find('first', array('recursive' => -1, 'conditions' => array('user_id' => $user['Users']['id'])));
+        if (empty($userShop['UserShop']['shop_id'])) {
+            return array(
+                'status' => 'NG',
+                'message' => 'User does not have any shop',
+            );
+        }
         $shop = $shop->find('first', array('recursive' => -1, 'conditions' => array('id' => $userShop['UserShop']['shop_id'])));
+        if (empty($shop['Shop']['id'])) {
+            return array(
+                'status' => 'NG',
+                'message' => 'User does not have any shop',
+            );
+        }
         if ($checkuiid && ($checkuiid['Shopuiid']['shop_id'] != $shop['Shop']['id'])) {
             return array(
                 'status' => 'NG',
