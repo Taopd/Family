@@ -65,10 +65,9 @@ class DATABASE_CONFIG {
         'datasource' => 'Database/Mysql',
         'persistent' => false,
         'host' => 'localhost',
-        'port' => '33060',
-        'login' => 'homestead',
-        'password' => 'secret',
-        'database' => 'trust_dk',
+        'login' => 'motapp',
+        'password' => 'motapp',
+        'database' => 'motapp',
         'prefix' => '',
         'encoding' => 'utf8',
     );
