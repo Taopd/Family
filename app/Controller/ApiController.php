@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Api Controller
+ *
+ * @property Shopuiid $Shopuiid
+ * @property Shop $Shop
+ */
+
 class ApiController extends AppController {
     public $uses = array('Shop', 'Shopuiid', 'TrstAppVersion','Users');
 
@@ -68,15 +75,26 @@ class ApiController extends AppController {
 
     public function getSendUrl($UIID) {
         $this->Shopuiid->primaryKey = 'uiid';
+
+        $urlSendData = null;
         if ($this->Shopuiid->exists($UIID)) {
-            $response_json = json_encode(array("url" => Configure::read('real_server')));
-            $this->set('result',$response_json);
+            $urlSendData = $this->getUrlPrivateSale($UIID);
+
+            if (empty($urlSendData)) {
+                $urlSendData = Configure::read('real_server');
+            }
         } else {
-            $response_json = json_encode(array("url" => Configure::read('test_server')));
-            $this->set('result',$response_json);
+            $urlSendData = Configure::read('test_server');
         }
 
+        $this->set('result',json_encode(array("url" => $urlSendData)));
         $this->render('default_api');
+    }
+
+    public function getUrlPrivateSale($UIID) {
+        $shopId = $this->Shopuiid->getShopId($UIID);
+
+        return $this->Shop->getUrlSendData($shopId);
     }
 
     public function getLatestVersion() {

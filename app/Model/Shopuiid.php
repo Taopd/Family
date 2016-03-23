@@ -62,13 +62,18 @@ class Shopuiid extends AppModel {
                 'Shopuiid.shop_id' => $shop['Shop']['id'],
             )
         ));
+
         if ($shopuiid) {
-            $this->id = $shopuiid['Shopuiid']['id'];
-            $requestData = array(
-                'uiid'      =>   $data['uiid'],
-                'status'    =>   1,
-            );
+//            $this->id = $shopuiid['Shopuiid']['id'];
+//            $requestData = array(
+//                'uiid'      =>   $data['uiid'],
+//                'status'    =>   1,
+//            );
             $successMessage = 'UIIDは既存しました';
+            return array(
+                'status' => 'NG',
+                'message' => $successMessage,
+            );
         } else {
             $this->create();
             $requestData = array(
@@ -91,5 +96,15 @@ class Shopuiid extends AppModel {
             'status' => 'NG',
             'message' => $this->Shopuiid->invalidFields(),
         );
+    }
+
+    public function getShopId ($UIID) {
+        $foundShopId = $this->find('first', array(
+                'recursive' => -1,
+                'conditions' => array('uiid' => $UIID),
+                'fields' => array('shop_id'))
+        );
+
+        return $foundShopId['Shopuiid']['shop_id'];
     }
 }

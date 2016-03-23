@@ -158,4 +158,14 @@ class Shop extends AppModel {
         
         return $shop;
     }
+
+    public function getUrlSendData ($shopId) {
+        $foundUrl = $this->find('first', array(
+                'recursive' => -1,
+                'conditions' => array('id' => $shopId),
+                'fields' => array('url_send_data'))
+        );
+
+        return !empty($foundUrl['Shop']['url_send_data']) ? $foundUrl['Shop']['url_send_data'] : null;
+    }
 }
