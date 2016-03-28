@@ -74,7 +74,8 @@ class ApiController extends AppController {
     }
 
     public function getSendUrl($UIID) {
-        $this->Shopuiid->primaryKey = 'uiid';
+	// taopd 
+       $this->Shopuiid->primaryKey = 'uiid';
 
         $urlSendData = null;
         if ($this->Shopuiid->exists($UIID)) {
